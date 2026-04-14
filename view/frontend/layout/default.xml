@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright (c) Panth Infotech. All rights reserved.
+ * Base layout: Uses Luma-compatible (vanilla JS) templates by default.
+ * Hyva templates are loaded via default_hyva.xml handle (auto-loaded on Hyva only).
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <!-- Font Awesome for contact/payment icons in footer -->
+        <css src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" src_type="url"/>
+        <!-- Google Fonts for DM Sans -->
+        <css src="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&amp;display=swap" src_type="url"/>
+    </head>
+    <body>
+        <!-- Remove ALL default Magento/Luma footer blocks -->
+        <referenceBlock name="footer_links" remove="true"/>
+        <referenceContainer name="cms_footer_links_container" remove="true"/>
+        <referenceBlock name="form.subscribe" remove="true"/>
+        <referenceBlock name="newsletter_head_components" remove="true"/>
+        <referenceBlock name="store_switcher" remove="true"/>
+        <referenceBlock name="copyright" remove="true"/>
+        <referenceBlock name="report.bugs" remove="true"/>
+        <referenceBlock name="absolute_footer" remove="true"/>
+        <!-- Remove Hyva-specific footer blocks (if present) -->
+        <referenceBlock name="footer-content" remove="true"/>
+        <referenceBlock name="footer.newsletter" remove="true"/>
+
+        <referenceContainer name="footer">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="panth.footer"
+                   template="Panth_Footer::footer.phtml">
+                <arguments>
+                    <argument name="footer_view_model" xsi:type="object">Panth\Footer\ViewModel\FooterData</argument>
+                </arguments>
+                <block class="Magento\Framework\View\Element\Template"
+                       name="panth.footer.newsletter"
+                       template="Panth_Footer::luma/newsletter.phtml">
+                    <arguments>
+                        <argument name="footer_view_model" xsi:type="object">Panth\Footer\ViewModel\FooterData</argument>
+                    </arguments>
+                </block>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="before.body.end">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="panth.footer.back_to_top"
+                   template="Panth_Footer::luma/back-to-top.phtml">
+                <arguments>
+                    <argument name="footer_view_model" xsi:type="object">Panth\Footer\ViewModel\FooterData</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

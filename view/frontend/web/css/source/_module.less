@@ -1,0 +1,295 @@
+/**
+ * Panth Footer — Luma LESS overrides
+ * Compiled into styles-m.css / styles-l.css by Magento's LESS pipeline.
+ */
+
+& when (@media-common = true) {
+
+    // Override Luma's footer container constraints using higher specificity (no !important needed)
+    .page-footer.page-footer {
+        background-color: transparent;
+        padding: 0;
+        margin: 0;
+        margin-top: 0;
+        border: none;
+    }
+
+    .page-footer > .footer.content,
+    .page-footer .footer.content {
+        padding: 0;
+        padding-left: 0;
+        padding-right: 0;
+        max-width: none;
+        width: 100%;
+        margin: 0;
+        box-sizing: border-box;
+        border-top: none;
+
+        .block { float: none; }
+        ul { padding: 0; list-style: none; margin: 0; }
+    }
+
+    // Font — force 16px base to match Hyva sizing
+    .panth-footer,
+    .panth-newsletter {
+        font-family: 'DM Sans', 'Inter', system-ui, -apple-system, sans-serif;
+        font-size: 16px;
+        line-height: 1.6;
+        box-sizing: border-box;
+        *, *::before, *::after { box-sizing: border-box; }
+    }
+
+    // Footer colors
+    .panth-footer {
+        background-color: var(--footer-bg, #171717);
+        color: var(--footer-text, #A3A3A3);
+        width: 100%;
+
+        a {
+            color: var(--footer-text, #A3A3A3);
+            text-decoration: none;
+            &:hover { color: var(--footer-h3-color, #E5E5E5); opacity: 1; text-decoration: none; }
+        }
+    }
+
+    // Footer text — match Hyva exactly (px values)
+    .panth-footer-text,
+    .panth-footer a,
+    .panth-footer li { color: var(--footer-text, #A3A3A3); font-size: 16px; line-height: 2; }
+    .panth-footer-h3,
+    .panth-footer h3 { color: var(--footer-h3-color, #E5E5E5); font-size: 18px; font-weight: 700; margin-bottom: 24px; line-height: 1.3; }
+    .panth-footer p { font-size: 16px; line-height: 1.7; }
+
+    .panth-social-icon {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: var(--footer-h3-color, #E5E5E5);
+        display: flex; align-items: center; justify-content: center;
+        width: 40px; height: 40px; border-radius: 8px;
+        transition: background-color 0.3s, transform 0.15s;
+        &:hover { background-color: var(--color-primary, #0D9488); transform: translateY(-2px); }
+        svg { width: 20px; height: 20px; color: var(--footer-h3-color, #E5E5E5); fill: var(--footer-h3-color, #E5E5E5); }
+    }
+
+    .panth-footer-follow-label { color: var(--footer-h3-color, #E5E5E5); font-size: 14px; font-weight: 600; margin-bottom: 16px; }
+    .panth-footer-bottom { border-color: rgba(255, 255, 255, 0.1); }
+    .panth-footer-copyright { color: var(--footer-text, #A3A3A3); opacity: 0.6; font-size: 14px; }
+    .panth-footer-payment-icon {
+        color: var(--footer-text, #A3A3A3); opacity: 0.5; font-size: 30px;
+    }
+    // Ensure payment icons always stay in a row
+    .panth-footer [class*="items-center"][class*="gap-4"]:has(.panth-footer-payment-icon) {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .panth-footer-bottom-link {
+        color: var(--footer-text, #A3A3A3); opacity: 0.6; transition: color 0.3s, opacity 0.3s; font-size: 14px;
+        &:hover { color: var(--footer-h3-color, #E5E5E5); opacity: 1; }
+    }
+
+    // Newsletter — all px values to avoid Luma's 14px root rem issue
+    .panth-newsletter { background-color: var(--footer-newsletter-bg, #262626); width: 100%; }
+    .panth-newsletter-title { color: var(--footer-newsletter-title, #F5F5F5); font-size: 36px; font-weight: 700; line-height: 1.2; margin-bottom: 16px; }
+    .panth-newsletter-text { color: var(--footer-newsletter-text, #A3A3A3); font-size: 18px; line-height: 1.6; }
+    .panth-newsletter-button {
+        background-color: var(--footer-newsletter-button-bg, #F97316);
+        color: var(--footer-newsletter-button-text, #FFFFFF);
+        font-size: 18px; font-weight: 600; padding: 18px 40px;
+        border-radius: 8px; border: none; cursor: pointer;
+        white-space: nowrap; flex-shrink: 0;
+        transition: background-color 0.3s, transform 0.15s;
+        &:hover { background-color: var(--footer-newsletter-button-hover, #EA580C); transform: translateY(-1px); }
+        span { color: inherit; }
+    }
+    // Override Luma's global input styles that break flex layout
+    .panth-newsletter input[type="email"].panth-newsletter-input {
+        background-color: var(--footer-newsletter-input-bg, #171717);
+        color: var(--footer-newsletter-input-text, #F5F5F5);
+        border-color: var(--footer-newsletter-input-border, #404040);
+        border-width: 2px; border-style: solid;
+        font-size: 18px; padding: 18px 24px; border-radius: 8px;
+        flex: 1 1 auto; min-width: 0; width: auto;
+        height: auto; line-height: normal;
+        margin: 0; box-shadow: none;
+        &:focus { border-color: var(--footer-newsletter-input-focus-border, #0D9488); outline: none; box-shadow: none; }
+        &::placeholder { color: var(--footer-newsletter-input-text, #F5F5F5); opacity: 0.5; }
+    }
+    .panth-newsletter span:not(.panth-newsletter-button span) { color: var(--footer-newsletter-text, #A3A3A3); }
+    .panth-newsletter-check { color: var(--color-primary, #0D9488); }
+
+    // Back to Top
+    .panth-back-to-top {
+        background-color: var(--footer-back-to-top-bg, #0D9488);
+        color: var(--footer-back-to-top-icon, #FFFFFF);
+        transition: background-color 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
+        &:hover {
+            background-color: var(--footer-back-to-top-hover-bg, #0F766E);
+            color: var(--footer-back-to-top-hover-icon, #FFFFFF);
+            transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+    }
+
+    // ==========================================
+    // Tailwind utility classes (scoped to footer)
+    // ==========================================
+    .panth-footer, .panth-newsletter {
+        .grid { display: grid; }
+        .flex { display: flex; }
+        .flex-col { flex-direction: column; }
+        .flex-wrap { flex-wrap: wrap; }
+        .flex-1 { flex: 1 1 0%; }
+        .items-center { align-items: center; }
+        .items-start { align-items: flex-start; }
+        .justify-between { justify-content: space-between; }
+        .justify-center { justify-content: center; }
+        .text-center { text-align: center; }
+        .gap-2 { gap: 8px; }
+        .gap-3 { gap: 12px; }
+        .gap-4 { gap: 16px; }
+        .gap-6 { gap: 24px; }
+        .gap-12 { gap: 48px; }
+        .max-w-7xl { max-width: 1280px; }
+        .max-w-6xl { max-width: 1152px; }
+        .max-w-2xl { max-width: 672px; }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+        .px-6 { padding-left: 24px; padding-right: 24px; }
+        .py-16 { padding-top: 64px; padding-bottom: 64px; }
+        .py-20 { padding-top: 80px; padding-bottom: 80px; }
+        .mb-4 { margin-bottom: 16px; }
+        .mb-6 { margin-bottom: 24px; }
+        .mb-12 { margin-bottom: 48px; }
+        .mt-1 { margin-top: 4px; }
+        .pt-8 { padding-top: 32px; }
+        .space-y-3 > * + * { margin-top: 12px; }
+        .space-y-4 > * + * { margin-top: 16px; }
+        .text-sm { font-size: 14px; }
+        .text-lg { font-size: 18px; }
+        .text-3xl { font-size: 30px; }
+        .text-4xl { font-size: 36px; }
+        .font-bold { font-weight: 700; }
+        .font-semibold { font-weight: 600; }
+        .leading-relaxed { line-height: 1.625; }
+        .opacity-85 { opacity: 0.85; }
+        .opacity-90 { opacity: 0.9; }
+        .rounded-lg { border-radius: 8px; }
+        .border-t { border-top: 1px solid; }
+        .w-5 { width: 20px; display: inline-block; text-align: center; }
+        .h-5 { height: 20px; }
+        .w-10 { width: 40px; }
+        .h-10 { height: 40px; }
+        .whitespace-nowrap { white-space: nowrap; }
+        .transition-colors { transition: color 0.3s, background-color 0.3s; }
+
+        // Grid — default single column
+        .grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
+    }
+}
+
+// Desktop: md breakpoint (768px+)
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .panth-footer, .panth-newsletter {
+        .md\:grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+        .md\:grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+        .md\:grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+        .md\:flex-row { flex-direction: row; }
+        .sm\:flex-row { flex-direction: row; }
+    }
+}
+
+// Large desktop: lg breakpoint (1024px+)
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .panth-footer, .panth-newsletter {
+        // Tailwind lg: prefix classes
+        .lg\:grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+        .lg\:grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+        .lg\:grid-cols-5 { grid-template-columns: repeat(5, 1fr); }
+    }
+}
+
+// Responsive overrides — raw CSS @media blocks (not LESS mixins) to ensure correct output
+// These MUST use higher specificity than the base .grid-cols-1 rule
+
+@media screen and (min-width: 768px) {
+    .page-footer .panth-footer [class*="md:grid-cols-2"] { grid-template-columns: repeat(2, 1fr); }
+    .page-footer .panth-footer [class*="md:grid-cols-3"] { grid-template-columns: repeat(3, 1fr); }
+    .page-footer .panth-footer [class*="md:grid-cols-4"] { grid-template-columns: repeat(4, 1fr); }
+    .page-footer .panth-footer [class*="md:flex-row"],
+    .page-footer .panth-newsletter [class*="sm:flex-row"] { flex-direction: row; }
+}
+
+@media screen and (min-width: 1024px) {
+    .page-footer .panth-footer [class*="lg:grid-cols-3"] { grid-template-columns: repeat(3, 1fr); }
+    .page-footer .panth-footer [class*="lg:grid-cols-4"] { grid-template-columns: repeat(4, 1fr); }
+    .page-footer .panth-footer [class*="lg:grid-cols-5"] { grid-template-columns: repeat(5, 1fr); }
+}
+
+// ==========================================
+// Mobile — exact match to Hyva mobile layout
+// ==========================================
+@media screen and (max-width: 767px) {
+    // Newsletter mobile — stacked input + full-width button
+    .panth-newsletter { padding: 48px 0; }
+    .panth-newsletter-title { font-size: 32px; }
+    .panth-newsletter-text { font-size: 16px; }
+    .panth-newsletter form > div:first-of-type {
+        flex-direction: column;
+    }
+    .panth-newsletter input[type="email"].panth-newsletter-input {
+        width: 100%; flex: none; font-size: 16px; padding: 16px 20px;
+    }
+    .panth-newsletter-button {
+        width: 100%; font-size: 18px; padding: 16px 24px; text-align: center;
+    }
+
+    // Footer mobile
+    .panth-footer { font-size: 16px; }
+    .panth-footer .max-w-7xl { padding: 40px 24px; }
+
+    // Headings — 24px bold (matches Hyva mobile)
+    .panth-footer-h3 { font-size: 24px; margin-bottom: 20px; }
+    // Links — 18px with generous spacing
+    .panth-footer-text { font-size: 18px; line-height: 2; }
+    // Follow Us — 16px bold
+    .panth-footer-follow-label { font-size: 16px; font-weight: 700; margin-bottom: 16px; }
+    // Social icons — 40px circles
+    .panth-social-icon {
+        width: 40px; height: 40px;
+        svg { width: 20px; height: 20px; }
+    }
+    // Section spacing
+    .panth-footer [class*="gap-12"] { gap: 40px; }
+    .panth-footer [class*="mb-12"] { margin-bottom: 40px; }
+    .panth-footer .space-y-3 > * + * { margin-top: 16px; }
+    .panth-footer .space-y-4 > * + * { margin-top: 18px; }
+    // Contact items
+    .panth-footer .opacity-85 { font-size: 17px; }
+    // Bottom bar — stacked
+    .panth-footer-bottom {
+        padding-top: 28px;
+        > div { flex-direction: column; text-align: center; gap: 20px; }
+        > div > div { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+    }
+    .panth-footer-copyright { font-size: 14px; }
+    .panth-footer-payment-icon { font-size: 30px; }
+    .panth-footer-bottom-link { font-size: 14px; }
+}
+
+// Tablet
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    .panth-newsletter-title { font-size: 32px; }
+    .panth-newsletter-text { font-size: 17px; }
+}
+
+// Desktop — ensure input + button are side by side
+@media screen and (min-width: 768px) {
+    .panth-newsletter form > div:first-of-type {
+        flex-direction: row;
+        flex-wrap: nowrap;
+    }
+    .panth-newsletter input[type="email"].panth-newsletter-input {
+        flex: 1 1 auto; width: auto;
+    }
+    .panth-newsletter-button {
+        width: auto; flex-shrink: 0;
+    }
+}

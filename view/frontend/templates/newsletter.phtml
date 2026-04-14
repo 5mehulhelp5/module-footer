@@ -1,0 +1,128 @@
+<?php
+/**
+ * Copyright (c) Panth Infotech. All rights reserved.
+ *
+ * Newsletter Section Template (Hyva Compatible)
+ */
+declare(strict_types=1);
+
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use Panth\Footer\ViewModel\FooterData;
+
+/** @var Escaper $escaper */
+/** @var Template $block */
+/** @var FooterData $footerViewModel */
+$footerViewModel = $block->getData('footer_view_model');
+if (!$footerViewModel || !$footerViewModel->isNewsletterEnabled()) {
+    return;
+}
+
+$title = $footerViewModel->getNewsletterTitle() ?: 'Stay in the Loop';
+$subtitle = $footerViewModel->getNewsletterSubtitle()
+    ?: 'Subscribe to our newsletter for exclusive deals, new arrivals, and special offers.';
+$placeholder = $footerViewModel->getNewsletterPlaceholder();
+$buttonText = $footerViewModel->getNewsletterButtonText();
+$benefits = $footerViewModel->getNewsletterBenefits();
+$formKey = $block->getFormKey();
+?>
+
+<!-- Newsletter Section -->
+<div class="panth-newsletter py-20">
+    <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center mb-12">
+            <h2 class="panth-newsletter-title text-4xl font-bold mb-4">
+                <?= $escaper->escapeHtml($title) ?>
+            </h2>
+            <p class="panth-newsletter-text text-lg max-w-2xl mx-auto">
+                <?= $escaper->escapeHtml($subtitle) ?>
+            </p>
+        </div>
+
+        <form
+            action="<?= $escaper->escapeUrl($block->getUrl('newsletter/subscriber/new')) ?>"
+            method="post"
+            id="panth-newsletter-form"
+            x-data="panthNewsletter()"
+            @submit.prevent="subscribe"
+            class="max-w-2xl mx-auto"
+        >
+            <input type="hidden" name="form_key" value="<?= $escaper->escapeHtmlAttr($formKey) ?>" />
+            <div class="flex flex-col sm:flex-row gap-4">
+                <input
+                    type="email"
+                    name="email"
+                    x-model="email"
+                    required
+                    placeholder="<?= $escaper->escapeHtmlAttr($placeholder) ?>"
+                    class="panth-newsletter-input flex-1 px-6 py-4 text-lg border-2 rounded-lg focus:outline-none transition-colors"
+                />
+                <button
+                    type="submit"
+                    :disabled="loading"
+                    class="panth-newsletter-button px-8 py-4 text-lg font-semibold rounded-lg disabled:opacity-50 whitespace-nowrap transition-colors"
+                >
+                    <span x-show="!loading"><?= $escaper->escapeHtml($buttonText) ?></span>
+                    <span x-show="loading" x-cloak><?= $escaper->escapeHtml(__('Subscribing...')) ?></span>
+                </button>
+            </div>
+
+            <div x-show="message" x-cloak class="mt-4 p-4 rounded-lg text-center"
+                 :class="success ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'">
+                <span x-text="message"></span>
+            </div>
+
+            <?php if (!empty($benefits)): ?>
+            <div class="mt-8 flex flex-wrap justify-center gap-6 text-sm">
+                <?php foreach ($benefits as $benefit): ?>
+                <div class="flex items-center gap-2">
+                    <svg class="w-5 h-5 panth-newsletter-check" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd"
+                              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+                    </svg>
+                    <span><?= $escaper->escapeHtml($benefit) ?></span>
+                </div>
+                <?php endforeach; ?>
+            </div>
+            <?php endif; ?>
+        </form>
+    </div>
+</div>
+
+<script>
+    function panthNewsletter() {
+        return {
+            email: '',
+            loading: false,
+            message: '',
+            success: false,
+            subscribe() {
+                if (!this.email) return;
+                this.loading = true;
+                this.message = '';
+                const formData = new FormData(this.$el);
+                fetch(this.$el.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                })
+                .then(response => {
+                    this.loading = false;
+                    if (response.ok) {
+                        this.success = true;
+                        this.message = '<?= $escaper->escapeJs(__('Thank you for subscribing!')) ?>';
+                        this.email = '';
+                    } else {
+                        this.success = false;
+                        this.message = '<?= $escaper->escapeJs(__('Something went wrong. Please try again.')) ?>';
+                    }
+                })
+                .catch(() => {
+                    this.loading = false;
+                    this.success = false;
+                    this.message = '<?= $escaper->escapeJs(__('Something went wrong. Please try again.')) ?>';
+                });
+            }
+        };
+    }
+</script>

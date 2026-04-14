@@ -1,0 +1,56 @@
+<?php
+/**
+ * Copyright (c) Panth Infotech. All rights reserved.
+ *
+ * Back to Top Button Template (Luma Compatible - Vanilla JS)
+ */
+declare(strict_types=1);
+
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use Panth\Footer\ViewModel\FooterData;
+
+/** @var Escaper $escaper */
+/** @var Template $block */
+/** @var FooterData $footerViewModel */
+$footerViewModel = $block->getData('footer_view_model');
+
+if (!$footerViewModel || !$footerViewModel->isBackToTopEnabled()) {
+    return;
+}
+?>
+
+<div id="panth-back-to-top"
+     style="position:fixed;bottom:24px;right:24px;z-index:40;opacity:0;transform:translateY(16px);
+            transition:opacity 0.3s ease,transform 0.3s ease;pointer-events:none;">
+    <button
+        onclick="window.scrollTo({top:0,behavior:'smooth'})"
+        class="panth-back-to-top"
+        style="width:56px;height:56px;border-radius:50%;border:none;cursor:pointer;
+               display:flex;align-items:center;justify-content:center;
+               box-shadow:0 4px 20px rgba(0,0,0,0.15);transition:all 0.3s ease;"
+        aria-label="<?= $escaper->escapeHtmlAttr(__('Back to Top')) ?>"
+        title="<?= $escaper->escapeHtmlAttr(__('Back to Top')) ?>"
+    >
+        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+        </svg>
+    </button>
+</div>
+
+<script>
+(function() {
+    var btn = document.getElementById('panth-back-to-top');
+    if (!btn) return;
+    var visible = false;
+    window.addEventListener('scroll', function() {
+        var show = window.scrollY > 300;
+        if (show !== visible) {
+            visible = show;
+            btn.style.opacity = show ? '1' : '0';
+            btn.style.transform = show ? 'translateY(0)' : 'translateY(16px)';
+            btn.style.pointerEvents = show ? 'auto' : 'none';
+        }
+    });
+})();
+</script>

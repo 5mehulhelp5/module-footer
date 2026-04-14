@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Panth Infotech. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <panth_footer>
+            <general>
+                <enabled>1</enabled>
+                <layout>4</layout>
+            </general>
+            <column1>
+                <enabled>1</enabled>
+                <show_logo>1</show_logo>
+                <title></title>
+                <content><![CDATA[Your trusted partner for quality products and exceptional service. Shop with confidence.]]></content>
+                <show_social>1</show_social>
+            </column1>
+            <column2>
+                <enabled>1</enabled>
+                <title>Shop</title>
+                <links><![CDATA[[{"title":"New Arrivals","url":"/what-is-new.html"},{"title":"Best Sellers","url":"/sale.html"},{"title":"Sale","url":"/sale.html"},{"title":"Gift Cards","url":"/catalog/category/view/id/3"}]]]></links>
+            </column2>
+            <column3>
+                <enabled>1</enabled>
+                <title>Customer Service</title>
+                <links><![CDATA[[{"title":"Contact Us","url":"/contact"},{"title":"Shipping Info","url":"/shipping"},{"title":"Returns","url":"/returns"},{"title":"FAQ","url":"/faq"}]]]></links>
+            </column3>
+            <column4>
+                <enabled>1</enabled>
+                <title>Contact</title>
+                <show_contact_info>1</show_contact_info>
+                <phone>1-800-SHOP-NOW</phone>
+                <email>support@store.com</email>
+                <address><![CDATA[123 Commerce Street, Business City, BC 12345]]></address>
+                <working_hours><![CDATA[Mon-Fri: 9AM-6PM]]></working_hours>
+            </column4>
+            <social>
+                <facebook>https://facebook.com</facebook>
+                <twitter>https://twitter.com</twitter>
+                <instagram>https://instagram.com</instagram>
+                <linkedin></linkedin>
+                <youtube></youtube>
+                <pinterest></pinterest>
+            </social>
+            <newsletter>
+                <enabled>1</enabled>
+                <title>Stay Connected</title>
+                <subtitle>Get exclusive offers and updates delivered to your inbox</subtitle>
+                <benefits><![CDATA[["Exclusive offers","New arrivals first","Member-only sales"]]]></benefits>
+                <placeholder_text>Enter your email address</placeholder_text>
+                <button_text>Subscribe</button_text>
+            </newsletter>
+            <back_to_top>
+                <enabled>1</enabled>
+                <position>bottom-right</position>
+            </back_to_top>
+            <bottom>
+                <show_payment_icons>1</show_payment_icons>
+                <copyright_text><![CDATA[&copy; {{year}} Your Store. Crafted with care for an exceptional shopping experience.]]></copyright_text>
+                <show_footer_links>1</show_footer_links>
+                <footer_links><![CDATA[[{"title":"Privacy Policy","url":"/privacy-policy"},{"title":"Terms of Service","url":"/terms"},{"title":"Cookie Policy","url":"/cookies"}]]]></footer_links>
+            </bottom>
+        </panth_footer>
+    </default>
+</config>

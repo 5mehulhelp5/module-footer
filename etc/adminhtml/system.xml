@@ -1,0 +1,225 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Panth Infotech. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="panth" translate="label" sortOrder="200">
+            <label>🚀 Panth Extensions</label>
+        </tab>
+        <section id="panth_footer" translate="label" type="text" sortOrder="97" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Footer Configuration</label>
+            <tab>panth</tab>
+            <resource>Panth_Footer::config</resource>
+
+
+            <!-- General Settings -->
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Settings</label>
+                <comment><![CDATA[<strong>Note:</strong> Footer colors have been moved to Theme Customizer for centralized management.]]></comment>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Custom Footer</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable or disable the custom footer</comment>
+                    <backend_model>Panth\Footer\Model\Config\Backend\Enabled</backend_model>
+                </field>
+                <field id="layout" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Footer Layout</label>
+                    <source_model>Panth\Footer\Model\Config\Source\Layout</source_model>
+                    <comment>Choose number of columns for footer</comment>
+                </field>
+            </group>
+
+            <!-- Column 1 (Logo and About) -->
+            <group id="column1" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Column 1 - Logo and About</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Column 1</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="show_logo" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Logo</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Display store logo in column 1</comment>
+                </field>
+                <field id="title" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Column Title</label>
+                    <comment>Title for column 1 (leave empty to hide)</comment>
+                    <backend_model>Panth\Core\Model\Config\Backend\Base</backend_model>
+                </field>
+                <field id="content" translate="label comment" type="textarea" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>About Text</label>
+                    <comment>Short description about your company (HTML allowed)</comment>
+                    <backend_model>Panth\Core\Model\Config\Backend\Base</backend_model>
+                </field>
+                <field id="show_social" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Social Media Icons</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <backend_model>Panth\Core\Model\Config\Backend\Base</backend_model>
+                </field>
+            </group>
+
+            <!-- Column 2 (Quick Links) -->
+            <group id="column2" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Column 2 - Quick Links</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Column 2</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <backend_model>Panth\Core\Model\Config\Backend\Base</backend_model>
+                </field>
+                <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Column Title</label>
+                </field>
+                <field id="links" translate="label comment" type="textarea" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Links (JSON Format)</label>
+                    <comment><![CDATA[Format: [{"title":"Title","url":"/url","target":"_self"}] — Use "_blank" and full URL (https://...) for external links]]></comment>
+                    <frontend_model>Panth\Footer\Block\Adminhtml\Form\Field\JsonBeautifier</frontend_model>
+                </field>
+            </group>
+
+            <!-- Column 3 (Customer Service) -->
+            <group id="column3" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Column 3 - Customer Service</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Column 3</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <backend_model>Panth\Core\Model\Config\Backend\Base</backend_model>
+                </field>
+                <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Column Title</label>
+                </field>
+                <field id="links" translate="label comment" type="textarea" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Links (JSON Format)</label>
+                    <comment><![CDATA[Format: [{"title":"Title","url":"/url","target":"_self"}] — Use "_blank" and full URL (https://...) for external links]]></comment>
+                    <frontend_model>Panth\Footer\Block\Adminhtml\Form\Field\JsonBeautifier</frontend_model>
+                </field>
+            </group>
+
+            <!-- Column 4 (Contact Info) -->
+            <group id="column4" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Column 4 - Contact Information</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Column 4</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <backend_model>Panth\Core\Model\Config\Backend\Base</backend_model>
+                </field>
+                <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Column Title</label>
+                </field>
+                <field id="show_contact_info" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Contact Information</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <backend_model>Panth\Core\Model\Config\Backend\Base</backend_model>
+                </field>
+                <field id="phone" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Phone Number</label>
+                </field>
+                <field id="email" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email Address</label>
+                </field>
+                <field id="address" translate="label" type="textarea" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Physical Address</label>
+                </field>
+                <field id="working_hours" translate="label" type="textarea" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Working Hours</label>
+                </field>
+            </group>
+
+            <!-- Social Media -->
+            <group id="social" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Social Media Links</label>
+                <field id="facebook" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Facebook URL</label>
+                </field>
+                <field id="twitter" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Twitter/X URL</label>
+                </field>
+                <field id="instagram" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Instagram URL</label>
+                </field>
+                <field id="linkedin" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>LinkedIn URL</label>
+                </field>
+                <field id="youtube" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>YouTube URL</label>
+                </field>
+                <field id="pinterest" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Pinterest URL</label>
+                </field>
+            </group>
+
+            <!-- Newsletter Section -->
+            <group id="newsletter" translate="label" type="text" sortOrder="65" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Newsletter Section</label>
+                <comment><![CDATA[<strong>Note:</strong> Newsletter colors have been moved to Theme Customizer.]]></comment>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Newsletter Section</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <backend_model>Panth\Core\Model\Config\Backend\Base</backend_model>
+                </field>
+                <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Section Title</label>
+                </field>
+                <field id="subtitle" translate="label" type="textarea" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Section Subtitle</label>
+                </field>
+                <field id="benefits" translate="label comment" type="textarea" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Benefits Text (JSON)</label>
+                    <comment><![CDATA[Format: ["Weekly updates","Exclusive deals","No spam, ever"]]]></comment>
+                    <frontend_model>Panth\Footer\Block\Adminhtml\Form\Field\JsonBeautifier</frontend_model>
+                </field>
+                <field id="placeholder_text" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email Placeholder Text</label>
+                </field>
+                <field id="button_text" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Subscribe Button Text</label>
+                </field>
+            </group>
+
+            <!-- Back to Top Button -->
+            <group id="back_to_top" translate="label" type="text" sortOrder="68" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Back to Top Button</label>
+                <comment><![CDATA[<strong>Note:</strong> Back to Top button colors have been moved to Theme Customizer.]]></comment>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Back to Top Button</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <backend_model>Panth\Core\Model\Config\Backend\Base</backend_model>
+                </field>
+                <field id="position" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Button Position</label>
+                    <source_model>Panth\Footer\Model\Config\Source\Position</source_model>
+                    <comment>Position of back to top button (default: bottom-right)</comment>
+                    <backend_model>Panth\Core\Model\Config\Backend\Base</backend_model>
+                </field>
+            </group>
+
+            <!-- Bottom Bar -->
+            <group id="bottom" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Bottom Bar</label>
+                <field id="show_payment_icons" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Payment Icons</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <backend_model>Panth\Core\Model\Config\Backend\Base</backend_model>
+                </field>
+                <field id="copyright_text" translate="label comment" type="textarea" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Copyright Text</label>
+                    <comment>Use {{year}} for current year. HTML allowed.</comment>
+                    <backend_model>Panth\Core\Model\Config\Backend\Base</backend_model>
+                </field>
+                <field id="show_footer_links" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Footer Bottom Links</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Privacy Policy, Terms, etc.</comment>
+                    <backend_model>Panth\Core\Model\Config\Backend\Base</backend_model>
+                </field>
+                <field id="footer_links" translate="label comment" type="textarea" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Footer Bottom Links (JSON)</label>
+                    <comment><![CDATA[Format: [{"title":"Title","url":"/url","target":"_self"}] — Use "_blank" for external links]]></comment>
+                    <frontend_model>Panth\Footer\Block\Adminhtml\Form\Field\JsonBeautifier</frontend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
