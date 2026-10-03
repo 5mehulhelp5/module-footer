@@ -1,0 +1,299 @@
+<?php
+/**
+ * Copyright (c) Panth Infotech. All rights reserved.
+ *
+ * Footer Section Template (Hyva Compatible)
+ */
+declare(strict_types=1);
+
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use Panth\Footer\ViewModel\FooterData;
+
+/** @var Escaper $escaper */
+/** @var Template $block */
+/** @var FooterData $footerViewModel */
+$footerViewModel = $block->getData('footer_view_model');
+if (!$footerViewModel || !$footerViewModel->isEnabled()) {
+    return;
+}
+$layout = $footerViewModel->getLayout();
+$gridClasses = $footerViewModel->getGridClasses();
+$allowedTags = $footerViewModel->getAllowedHtmlTags();
+$columns = [];
+for ($i = 1; $i <= $layout; $i++) {
+    $columnData = $footerViewModel->getColumnData($i);
+    if (!$columnData['enabled'] || ($i === 4 && empty($columnData['show_contact_info']))) {
+        continue;
+    }
+    $columns[$i] = $columnData;
+}
+?>
+
+<!-- Newsletter -->
+<?php if ($footerViewModel->isNewsletterEnabled()): ?>
+    <?= $block->getChildHtml('panth.footer.newsletter') ?>
+<?php endif; ?>
+
+<style>
+    .panth-newsletter .panth-newsletter-button {
+        background-color: color-mix(in srgb, var(--footer-newsletter-button-bg, #F97316) 75%, #000);
+    }
+    .panth-newsletter .panth-newsletter-button:hover {
+        background-color: color-mix(in srgb, var(--footer-newsletter-button-bg, #F97316) 62%, #000);
+    }
+    .panth-newsletter .panth-newsletter-input::placeholder {
+        opacity: 0.7;
+    }
+    .panth-footer .panth-footer-logo {
+        display: inline-flex;
+        align-items: center;
+        padding: 8px 12px;
+        border-radius: 8px;
+        background: #fff;
+    }
+    .panth-footer .panth-footer-logo img:not([width]) {
+        width: 160px;
+        max-width: 100%;
+        height: auto;
+    }
+    .panth-newsletter .panth-newsletter-input,
+    .panth-newsletter .panth-newsletter-button {
+        font-family: inherit;
+    }
+    .panth-footer .panth-footer-copyright,
+    .panth-footer a.panth-footer-bottom-link {
+        opacity: 0.85;
+        font-size: 14px;
+    }
+    .panth-footer a.panth-footer-bottom-link:hover,
+    .panth-footer a.panth-footer-bottom-link:focus-visible {
+        opacity: 1;
+    }
+    .panth-footer .panth-footer-payment-icon {
+        opacity: 0.85;
+    }
+    .panth-footer .panth-social-icon {
+        width: 44px;
+        height: 44px;
+    }
+    .panth-footer .panth-footer-bottom-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        column-gap: 24px;
+    }
+    .panth-footer a.panth-footer-bottom-link {
+        white-space: nowrap;
+    }
+    @media (max-width: 1024px) {
+        .panth-footer .panth-footer-bottom > .panth-footer-bottom-row {
+            flex-direction: column;
+            text-align: center;
+        }
+    }
+    @media (max-width: 1024px) {
+        .panth-footer a.panth-footer-text,
+        .panth-footer a.panth-footer-bottom-link {
+            display: inline-flex;
+            align-items: center;
+            min-height: 44px;
+            min-width: 44px;
+        }
+        .panth-footer .space-y-3 > * + * {
+            margin-top: 0;
+        }
+        html:has(.panth-btt--right) {
+            --panth-float-col-btt-right: calc(var(--whatsapp-float-bottom-with-btt, 92px) - var(--panth-float-edge, 24px));
+        }
+        html:has(.panth-btt--left) {
+            --panth-float-col-btt-left: calc(var(--whatsapp-float-bottom-with-btt, 92px) - var(--panth-float-edge, 24px));
+        }
+        html:has(.panth-euw-float--right) {
+            --panth-float-col-euw-right: 44px;
+        }
+        html:has(.panth-euw-float--left) {
+            --panth-float-col-euw-left: 44px;
+        }
+        html:has(.live-activity-notification.live-activity-bottom-right) {
+            --panth-float-col-toast-right: 152px;
+        }
+        html:has(.live-activity-notification.live-activity-bottom-left) {
+            --panth-float-col-toast-left: 152px;
+        }
+        .panth-footer {
+            padding-bottom: calc(var(--panth-float-edge, 24px) + 8px + max(
+                var(--panth-float-col-btt-right, 0px) + var(--panth-float-slot-wa-right, 0px) + max(var(--panth-float-col-euw-right, 0px), var(--panth-float-col-toast-right, 0px)),
+                var(--panth-float-col-btt-left, 0px) + var(--panth-float-slot-wa-left, 0px) + max(var(--panth-float-col-euw-left, 0px), var(--panth-float-col-toast-left, 0px))
+            ));
+        }
+    }
+</style>
+
+<!-- Footer -->
+<footer class="panth-footer">
+    <div class="max-w-7xl mx-auto px-6 py-16">
+
+        <?php if (!empty($columns)): ?>
+        <div class="grid <?= $escaper->escapeHtmlAttr($gridClasses) ?> gap-12 mb-12">
+
+            <?php foreach ($columns as $i => $columnData): ?>
+
+                    <?php if ($i === 1): ?>
+                        <!-- Brand Column -->
+                        <div>
+                            <?php if (!empty($columnData['show_logo'])): ?>
+                                <div class="mb-6"><?= $block->getChildHtml('logo') ?></div>
+                            <?php endif; ?>
+
+                            <?php if ($columnData['title'] !== ''): ?>
+                                <h3 class="panth-footer-h3 text-lg font-bold mb-6">
+                                    <?= $escaper->escapeHtml($columnData['title']) ?>
+                                </h3>
+                            <?php endif; ?>
+
+                            <?php if (!empty($columnData['content'])): ?>
+                                <p class="panth-footer-text opacity-90 mb-6 leading-relaxed">
+                                    <?= $escaper->escapeHtml($columnData['content'], $allowedTags) ?>
+                                </p>
+                            <?php endif; ?>
+
+                            <?php if (!empty($columnData['show_social'])): ?>
+                                <?php $socialLinks = $footerViewModel->getSocialLinks(); ?>
+                                <?php if (!empty($socialLinks)): ?>
+                                    <div>
+                                        <p class="panth-footer-follow-label text-sm font-semibold mb-4">
+                                            <?= $escaper->escapeHtml(__('Follow Us')) ?>
+                                        </p>
+                                        <div class="flex gap-3">
+                                            <?php foreach ($socialLinks as $platform => $url): ?>
+                                                <a href="<?= $escaper->escapeUrl($url) ?>"
+                                                   target="_blank"
+                                                   rel="noopener noreferrer"
+                                                   class="panth-social-icon w-10 h-10 rounded-lg flex items-center justify-center"
+                                                   aria-label="<?= $escaper->escapeHtmlAttr(ucfirst($platform)) ?>">
+                                                    <?= /* @noEscape */ $footerViewModel->getSocialIcon($platform) ?>
+                                                </a>
+                                            <?php endforeach; ?>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                        </div>
+
+                    <?php elseif ($i === 4): ?>
+                        <!-- Contact Column -->
+                        <div>
+                            <h3 class="panth-footer-h3 text-lg font-bold mb-6">
+                                <?= $escaper->escapeHtml($columnData['title']) ?>
+                            </h3>
+                            <div class="space-y-4">
+                                <?php if (!empty($columnData['phone'])): ?>
+                                    <a href="tel:<?= $escaper->escapeHtmlAttr(
+                                        preg_replace('/[^0-9+]/', '', $columnData['phone'])
+                                    ) ?>"
+                                       class="panth-footer-text opacity-85 flex items-center gap-3 transition-colors hover:opacity-100">
+                                        <i class="fas fa-phone w-5" aria-hidden="true"></i>
+                                        <span><?= $escaper->escapeHtml($columnData['phone']) ?></span>
+                                    </a>
+                                <?php endif; ?>
+
+                                <?php if (!empty($columnData['email'])): ?>
+                                    <a href="mailto:<?= $escaper->escapeHtmlAttr($columnData['email']) ?>"
+                                       class="panth-footer-text opacity-85 flex items-center gap-3 transition-colors hover:opacity-100">
+                                        <i class="fas fa-envelope w-5" aria-hidden="true"></i>
+                                        <span><?= $escaper->escapeHtml($columnData['email']) ?></span>
+                                    </a>
+                                <?php endif; ?>
+
+                                <?php if (!empty($columnData['address'])): ?>
+                                    <div class="panth-footer-text opacity-85 flex items-start gap-3">
+                                        <i class="fas fa-map-marker-alt w-5 mt-1" aria-hidden="true"></i>
+                                        <span><?= $escaper->escapeHtml($columnData['address'], ['br']) ?></span>
+                                    </div>
+                                <?php endif; ?>
+
+                                <?php if (!empty($columnData['working_hours'])): ?>
+                                    <div class="panth-footer-text opacity-85 flex items-start gap-3">
+                                        <i class="fas fa-clock w-5 mt-1" aria-hidden="true"></i>
+                                        <span><?= $escaper->escapeHtml($columnData['working_hours'], ['br']) ?></span>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+
+                    <?php else: ?>
+                        <!-- Link Columns -->
+                        <div>
+                            <h3 class="panth-footer-h3 text-lg font-bold mb-6">
+                                <?= $escaper->escapeHtml($columnData['title']) ?>
+                            </h3>
+                            <?php if (!empty($columnData['links'])): ?>
+                                <ul class="space-y-3">
+                                    <?php foreach ($columnData['links'] as $link): ?>
+                                        <li>
+                                            <a href="<?= $escaper->escapeUrl($link['url']) ?>"
+                                               <?php if ($link['target'] !== ''): ?>
+                                               target="<?= $escaper->escapeHtmlAttr($link['target']) ?>"
+                                               <?php endif; ?>
+                                               <?php if ($link['target'] === '_blank'): ?>
+                                               rel="noopener noreferrer"
+                                               <?php endif; ?>
+                                               class="panth-footer-text opacity-85 transition-colors hover:opacity-100">
+                                                <?= $escaper->escapeHtml($link['title']) ?>
+                                            </a>
+                                        </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            <?php endif; ?>
+                        </div>
+                    <?php endif; ?>
+
+            <?php endforeach; ?>
+
+        </div>
+        <?php endif; ?>
+
+        <!-- Footer Bottom -->
+        <div class="panth-footer-bottom border-t pt-8">
+            <div class="panth-footer-bottom-row flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
+                <div class="panth-footer-copyright">
+                    <?= $escaper->escapeHtml($footerViewModel->getCopyrightText(), $allowedTags) ?>
+                </div>
+
+                <?php if ($footerViewModel->showPaymentIcons()): ?>
+                    <div class="flex items-center gap-4" role="img"
+                         aria-label="<?= $escaper->escapeHtmlAttr(
+                             __('Accepted payment methods: Visa, Mastercard, PayPal, American Express')
+                         ) ?>">
+                        <i class="fab fa-cc-visa text-3xl panth-footer-payment-icon" aria-hidden="true"></i>
+                        <i class="fab fa-cc-mastercard text-3xl panth-footer-payment-icon" aria-hidden="true"></i>
+                        <i class="fab fa-cc-paypal text-3xl panth-footer-payment-icon" aria-hidden="true"></i>
+                        <i class="fab fa-cc-amex text-3xl panth-footer-payment-icon" aria-hidden="true"></i>
+                    </div>
+                <?php endif; ?>
+
+                <?php if ($footerViewModel->showFooterLinks()): ?>
+                    <?php $bottomLinks = $footerViewModel->getFooterLinks(); ?>
+                    <?php if (!empty($bottomLinks)): ?>
+                        <div class="panth-footer-bottom-links">
+                            <?php foreach ($bottomLinks as $link): ?>
+                                <a href="<?= $escaper->escapeUrl($link['url']) ?>"
+                                   <?php if ($link['target'] !== ''): ?>
+                                   target="<?= $escaper->escapeHtmlAttr($link['target']) ?>"
+                                   <?php endif; ?>
+                                   <?php if ($link['target'] === '_blank'): ?>
+                                   rel="noopener noreferrer"
+                                   <?php endif; ?>
+                                   class="panth-footer-bottom-link">
+                                    <?= $escaper->escapeHtml($link['title']) ?>
+                                </a>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+                <?php endif; ?>
+            </div>
+        </div>
+
+    </div>
+</footer>

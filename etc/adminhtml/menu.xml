@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Panth_Footer::group"
+             title="Footer"
+             module="Panth_Footer"
+             sortOrder="15"
+             parent="Panth_Core::panth_extensions"
+             resource="Panth_Footer::config"/>
+        <add id="Panth_Footer::settings"
+             title="Configuration"
+             module="Panth_Footer"
+             sortOrder="10"
+             parent="Panth_Footer::group"
+             action="adminhtml/system_config/edit/section/panth_footer"
+             resource="Panth_Footer::config"/>
+    </menu>
+</config>

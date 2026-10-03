@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright (c) Panth Infotech. All rights reserved.
+ * Hyva-specific layout: Override templates with Alpine.js versions.
+ * This handle is only added when the Hyva theme is active.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <!-- Switch newsletter to Hyva/Alpine.js template -->
+        <referenceBlock name="panth.footer.newsletter">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Panth_Footer::hyva/newsletter.phtml</argument>
+            </action>
+        </referenceBlock>
+
+        <!-- Switch back-to-top to Hyva/Alpine.js template -->
+        <referenceBlock name="panth.footer.back_to_top">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Panth_Footer::hyva/back-to-top.phtml</argument>
+            </action>
+        </referenceBlock>
+    </body>
+</page>

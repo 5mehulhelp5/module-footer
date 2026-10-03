@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright (c) Panth Infotech. All rights reserved.
+ * Base layout: Uses Luma-compatible (vanilla JS) templates by default.
+ * Hyva templates are loaded via default_hyva.xml handle (auto-loaded on Hyva only).
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="footer">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="panth.footer"
+                   template="Panth_Footer::footer.phtml">
+                <arguments>
+                    <argument name="footer_view_model" xsi:type="object">Panth\Footer\ViewModel\FooterData</argument>
+                </arguments>
+                <block class="Magento\Framework\View\Element\Template"
+                       name="panth.footer.newsletter"
+                       template="Panth_Footer::luma/newsletter.phtml">
+                    <arguments>
+                        <argument name="footer_view_model" xsi:type="object">Panth\Footer\ViewModel\FooterData</argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Theme\Block\Html\Header\Logo"
+                       name="panth.footer.logo"
+                       as="logo"
+                       template="Panth_Footer::logo.phtml">
+                    <arguments>
+                        <argument name="logoPathResolver" xsi:type="object">Magento\Theme\ViewModel\Block\Html\Header\LogoPathResolver</argument>
+                        <argument name="logo_size_resolver" xsi:type="object">Magento\Theme\ViewModel\Block\Html\Header\LogoSizeResolver</argument>
+                    </arguments>
+                </block>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="before.body.end">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="panth.footer.back_to_top"
+                   template="Panth_Footer::luma/back-to-top.phtml">
+                <arguments>
+                    <argument name="footer_view_model" xsi:type="object">Panth\Footer\ViewModel\FooterData</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

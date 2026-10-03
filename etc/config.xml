@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Panth Infotech. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <panth_footer>
+            <general>
+                <enabled>1</enabled>
+                <layout>4</layout>
+            </general>
+            <column1>
+                <enabled>1</enabled>
+                <show_logo>1</show_logo>
+                <title></title>
+                <content><![CDATA[Your trusted partner for quality products and exceptional service. Shop with confidence.]]></content>
+                <show_social>1</show_social>
+            </column1>
+            <column2>
+                <enabled>1</enabled>
+                <title>Quick Links</title>
+                <links><![CDATA[[{"title":"My Account","url":"/customer/account/"},{"title":"Shopping Cart","url":"/checkout/cart/"},{"title":"Search Terms","url":"/search/term/popular/"},{"title":"Advanced Search","url":"/catalogsearch/advanced/"}]]]></links>
+            </column2>
+            <column3>
+                <enabled>1</enabled>
+                <title>Customer Service</title>
+                <links><![CDATA[[{"title":"Contact Us","url":"/contact"},{"title":"Customer Service","url":"/customer-service"},{"title":"About Us","url":"/about-us"},{"title":"Orders and Returns","url":"/sales/guest/form/"}]]]></links>
+            </column3>
+            <column4>
+                <enabled>1</enabled>
+                <title>Contact</title>
+                <show_contact_info>1</show_contact_info>
+                <phone>1-800-SHOP-NOW</phone>
+                <email>support@store.com</email>
+                <address><![CDATA[123 Commerce Street, Business City, BC 12345]]></address>
+                <working_hours><![CDATA[Mon-Fri: 9AM-6PM]]></working_hours>
+            </column4>
+            <social>
+                <facebook>https://facebook.com</facebook>
+                <twitter>https://twitter.com</twitter>
+                <instagram>https://instagram.com</instagram>
+                <linkedin></linkedin>
+                <youtube></youtube>
+                <pinterest></pinterest>
+            </social>
+            <newsletter>
+                <enabled>1</enabled>
+                <title>Stay Connected</title>
+                <subtitle>Get exclusive offers and updates delivered to your inbox</subtitle>
+                <benefits><![CDATA[["Exclusive offers","New arrivals first","Member-only sales"]]]></benefits>
+                <placeholder_text>Enter your email address</placeholder_text>
+                <button_text>Subscribe</button_text>
+            </newsletter>
+            <back_to_top>
+                <enabled>1</enabled>
+                <position>bottom-right</position>
+            </back_to_top>
+            <bottom>
+                <show_payment_icons>1</show_payment_icons>
+                <copyright_text><![CDATA[&copy; {{year}} Your Store. Crafted with care for an exceptional shopping experience.]]></copyright_text>
+                <show_footer_links>1</show_footer_links>
+                <footer_links><![CDATA[[{"title":"Privacy Policy","url":"/privacy-policy-cookie-restriction-mode"},{"title":"Enable Cookies","url":"/enable-cookies"},{"title":"Contact Us","url":"/contact"}]]]></footer_links>
+            </bottom>
+        </panth_footer>
+    </default>
+</config>

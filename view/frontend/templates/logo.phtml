@@ -1,0 +1,29 @@
+<?php
+/**
+ * Copyright (c) Panth Infotech. All rights reserved.
+ */
+declare(strict_types=1);
+
+use Magento\Framework\Escaper;
+use Magento\Theme\Block\Html\Header\Logo;
+
+/** @var Escaper $escaper */
+/** @var Logo $block */
+$logoSrc = (string)$block->getLogoSrc();
+if ($logoSrc === '') {
+    return;
+}
+$logoAlt = (string)($block->getLogoAlt() ?: __('Store logo'));
+$logoWidth = (int)$block->getLogoWidth();
+$logoHeight = (int)$block->getLogoHeight();
+?>
+<a href="<?= $escaper->escapeUrl($block->getUrl('')) ?>"
+   class="panth-footer-logo inline-block"
+   aria-label="<?= $escaper->escapeHtmlAttr(__('Go to Home page')) ?>">
+    <img src="<?= $escaper->escapeUrl($logoSrc) ?>"
+         alt="<?= $escaper->escapeHtmlAttr($logoAlt) ?>"
+         <?php if ($logoWidth > 0): ?>width="<?= (int)$logoWidth ?>"<?php endif; ?>
+         <?php if ($logoHeight > 0): ?>height="<?= (int)$logoHeight ?>"<?php endif; ?>
+         style="max-width:200px;height:auto;"
+         loading="lazy" />
+</a>

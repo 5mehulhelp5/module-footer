@@ -1,0 +1,27 @@
+{
+  "footer": {
+    "bg": "#171717",
+    "text": "#A3A3A3",
+    "h2-color": "#F5F5F5",
+    "h3-color": "#E5E5E5",
+    "newsletter": {
+      "bg": "#262626",
+      "title": "#F5F5F5",
+      "text": "#A3A3A3",
+      "button-bg": "#F97316",
+      "button-text": "#FFFFFF",
+      "button-hover": "#EA580C",
+      "input-bg": "#171717",
+      "input-text": "#F5F5F5",
+      "input-border": "#404040",
+      "input-focus-border": "#0D9488"
+    },
+    "back-to-top": {
+      "bg": "#0D9488",
+      "icon": "#FFFFFF",
+      "hover-bg": "#0F766E",
+      "hover-icon": "#FFFFFF"
+    }
+  },
+  "color-primary": "#0D9488"
+}

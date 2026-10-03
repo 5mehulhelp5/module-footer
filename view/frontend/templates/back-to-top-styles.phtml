@@ -1,0 +1,55 @@
+<?php
+/**
+ * Copyright (c) Panth Infotech. All rights reserved.
+ *
+ * Back to Top Button - shared floating stack styles (Hyva and Luma)
+ */
+declare(strict_types=1);
+?>
+<style>
+    .panth-btt {
+        position: fixed;
+        bottom: calc(var(--panth-float-edge, 24px) + var(--panth-bottom-bar-offset, 0px) + env(safe-area-inset-bottom, 0px));
+        z-index: 30;
+        transition: bottom 0.2s ease, opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    }
+    .panth-btt--right { right: 24px; }
+    .panth-btt--left { left: 24px; }
+    @media (max-width: 767px) {
+        :root {
+            --panth-float-edge: 16px;
+        }
+    }
+    html:has(.panth-btt.panth-btt--right.panth-btt--visible) {
+        --panth-float-slot-btt-right: calc(var(--whatsapp-float-bottom-with-btt, 92px) - var(--panth-float-edge, 24px));
+    }
+    html:has(.panth-btt.panth-btt--left.panth-btt--visible) {
+        --panth-float-slot-btt-left: calc(var(--whatsapp-float-bottom-with-btt, 92px) - var(--panth-float-edge, 24px));
+    }
+    html.panth-overlay-open .panth-btt,
+    html.nav-open .panth-btt,
+    html:has(dialog[open]) .panth-btt,
+    html:has(.pmenu-mobile-drawer.is-open) .panth-btt,
+    html:has(.qv-overlay.active) .panth-btt,
+    html:has(.modals-wrapper ._show) .panth-btt,
+    html:has(.minicart-wrapper.active) .panth-btt,
+    html:has([role="dialog"][aria-modal="true"][x-show]:not([x-cloak]):not([style*="display: none"])) .panth-btt,
+    html:has(#search-content:not([x-cloak]):not([style*="display: none"])) .panth-btt {
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+    }
+    @media (max-width: 1023px) {
+        html:has(.panth-btt.panth-btt--right) {
+            --panth-float-reserve-right: calc(24px + 56px + 8px);
+        }
+        html:has(.panth-btt.panth-btt--left) {
+            --panth-float-reserve-left: calc(24px + 56px + 8px);
+        }
+        html:has(input:not([type="checkbox"]):not([type="radio"]):focus, textarea:focus, select:focus) .panth-btt {
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+        }
+    }
+</style>

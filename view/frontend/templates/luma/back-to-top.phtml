@@ -1,0 +1,82 @@
+<?php
+/**
+ * Copyright (c) Panth Infotech. All rights reserved.
+ *
+ * Back to Top Button Template (Luma Compatible - Vanilla JS)
+ */
+declare(strict_types=1);
+
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use Panth\Footer\ViewModel\FooterData;
+
+/** @var Escaper $escaper */
+/** @var Template $block */
+/** @var FooterData $footerViewModel */
+$footerViewModel = $block->getData('footer_view_model');
+
+if (!$footerViewModel || !$footerViewModel->isBackToTopEnabled()) {
+    return;
+}
+$sideClass = $footerViewModel->getBackToTopPosition() === 'bottom-left' ? 'panth-btt--left' : 'panth-btt--right';
+?>
+<?= /* @noEscape */ $block->fetchView($block->getTemplateFile('Panth_Footer::back-to-top-styles.phtml')) ?>
+<style>
+    #panth-back-to-top {
+        opacity: 0;
+        transform: translateY(16px);
+        pointer-events: none;
+    }
+    #panth-back-to-top.panth-btt--visible {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+    #panth-back-to-top .panth-back-to-top {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        transition: all 0.3s ease;
+    }
+</style>
+
+<div id="panth-back-to-top" class="panth-btt <?= $escaper->escapeHtmlAttr($sideClass) ?>">
+    <button
+        type="button"
+        class="panth-back-to-top"
+        aria-label="<?= $escaper->escapeHtmlAttr(__('Back to Top')) ?>"
+        title="<?= $escaper->escapeHtmlAttr(__('Back to Top')) ?>"
+    >
+        <svg width="24" height="24" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+        </svg>
+    </button>
+</div>
+
+<script>
+(function() {
+    var btn = document.getElementById('panth-back-to-top');
+    if (!btn) {
+        return;
+    }
+    var visible = false;
+    btn.querySelector('button').addEventListener('click', function() {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    });
+    function update() {
+        var show = window.scrollY > 300;
+        if (show !== visible) {
+            visible = show;
+            btn.classList.toggle('panth-btt--visible', show);
+        }
+    }
+    window.addEventListener('scroll', update, {passive: true});
+    update();
+})();
+</script>
